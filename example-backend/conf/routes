@@ -1,0 +1,8 @@
+
+# Assets
+GET /assets/*file               controllers.Assets.at(path="/", file)
+
+# App
+GET /                           controllers.ResponseController.index()
+
+GET /randomInteger/:min/:max    controllers.ResponseController.randomInteger(min: Int, max: Int)

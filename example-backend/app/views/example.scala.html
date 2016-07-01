@@ -1,0 +1,65 @@
+@()
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Example</title>
+</head>
+
+<body>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
+    <script type="text/javascript" src="assets/knockout-example-fastopt.js"></script>
+    <script type="text/javascript" src="assets/knockout-example-jsdeps.js"></script>
+
+    First name <input data-bind="value: firstName"/> <br/>
+    Last name <input data-bind="value: lastName"/> <br/>
+    Computed full name <pre style="display: inline" data-bind="text: fullName"> </pre> <br/>
+    Read/Write computed full name <input data-bind="value: twoWayComputedFullName"/> <br/>
+    <br/>
+
+    v1 <input data-bind="value: value1Field"/> <br/>
+    v2 <input data-bind="value: value2Field"/> <br/>
+    v3 <input data-bind="value: value3Field"/> <br/>
+    values <input data-bind="value: valuesField"/> <br/>
+    v1 + v2 + v3 + values = <pre style="display: inline" data-bind="text: sumOfValues"> </pre> <br/>
+    <br/>
+
+    SubViewModel <br/>
+    <div data-bind="foreach: subViewModels">
+        <input data-bind="value: aValue"/>
+        <input data-bind="value: bValueString"/>
+        <pre style="display: inline" data-bind="text: cValue"> </pre>
+        <br/>
+    </div>
+
+    <button type="button" data-bind="click: addNewSub"> Add new SubViewModel </button>
+    <button type="button" data-bind="click: unsubscribe"> Unsubscribe </button>
+    <br/>
+    <br/>
+
+    Validation <br/>
+    <validated-field1 params="notallowed: 'hjkl'"></validated-field1><br/>
+    <validated-field1 params="notallowed: '0123456789-+*/'"></validated-field1><br/>
+    <validated-field1 params="notallowed: 'abcdefghijklmnopqrstuvwxyz'"></validated-field1><br/>
+    <br/>
+
+    With Component util <br/>
+    <validated-field2 params="notallowed: 'hjkl'"></validated-field2><br/>
+    <validated-field2 params="notallowed: '0123456789-+*/'"></validated-field2><br/>
+    <validated-field2 id="foo" params="notallowed: 'abcdefghijklmnopqrstuvwxyz'"></validated-field2><br/>
+    <button type="button" data-bind="click: removeFoo"> Remove Last </button> <br/>
+    <pre style="display: inline" data-bind="text: allValues"></pre><br/>
+    <pre style="display: inline" data-bind="text: allValid"></pre><br/>
+    <br/>
+
+    Get random int from server <br/>
+    Min <int-field style="display: inline" params="name: 'min'"></int-field>
+    Max <int-field style="display: inline" params="name: 'max'"></int-field>
+    <pre data-bind="text: randomIntText"> </pre>
+
+    <script>
+        henes.knockout.example.ExampleViewModel().main()
+    </script>
+</body>
+
+</html> 
