@@ -1,0 +1,13 @@
+@()
+
+Full name: <input data-bind="textInput: fullName"/> <br/>
+First name: <div style="display: inline" data-bind="text: firstName"></div> <br/>
+Last name: <div style="display: inline" data-bind="text: lastName"></div> <br/>
+<button data-bind="click: insertName"> Add to list </button>
+<br/>
+<br/>
+
+List of Names: <br/>
+<div data-bind="foreach: listOfNames">
+    <div data-bind="text: $data"></div>
+</div>
