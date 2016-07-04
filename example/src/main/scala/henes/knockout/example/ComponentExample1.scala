@@ -9,8 +9,12 @@ import org.scalajs.dom.window
 import scala.scalajs.js
 
 @JSExportAll
-object ComponentExample1 {
-  val nameList = Knockout.observableArray[String](Nil)
+object ComponentExample1 extends Example {
+  val id: String = "componentExample1"
+
+  val name: String = "Component 1"
+
+  val nameList = Knockout.observableArray[String]()
 
   val insertNameFieldComponent = Knockout.component[InsertNameFieldViewModel, InsertNameFieldParameters]("insertnamefield", {
     (params, info) =>

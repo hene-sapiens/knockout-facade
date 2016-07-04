@@ -7,11 +7,23 @@ import scala.scalajs.js.annotation.JSExportAll
 
 @JSExportAll
 object ExampleViewModel extends js.JSApp {
-  val visibleExample = Knockout.observable("")
+  val visibleExample = Knockout.observable[String]("")
+
+  val examples = Knockout.observableArray(
+    ObservableExample1,
+    ComponentExample1
+  )
+
   val observableExample1 = ObservableExample1
   val componentExample1 = ComponentExample1
 
   def main(): Unit = {
     Knockout.applyBindings(this)
   }
+}
+
+@JSExportAll
+trait Example {
+  def id: String
+  def name: String
 }

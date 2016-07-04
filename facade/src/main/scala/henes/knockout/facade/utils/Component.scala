@@ -10,7 +10,7 @@ import scala.scalajs.js
 // P: Component parameters trait
 case class Component[V, P <: js.Object](name: String, createViewModelFn: (P, ko.components.ComponentInfo) => V, template: String) {
   private var instancesMap : Map[Node, V] = Map()
-  lazy val instances = Knockout.observableArray[V](Nil)
+  lazy val instances = Knockout.observableArray[V]()
 
   private def updateInstancesObservable(): Unit =
     instances(js.Array(instancesMap.values.toVector: _*))

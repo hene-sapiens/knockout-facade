@@ -6,7 +6,11 @@ import scala.scalajs.js.annotation.JSExportAll
 import org.scalajs.dom.window
 
 @JSExportAll
-object ObservableExample1 {
+object ObservableExample1 extends Example {
+  val id: String = "observableExample1"
+
+  val name: String = "Observable 1"
+
   val fullName = Knockout.observable("")
 
   val firstName = Knockout.pureComputed[Option[String]]({
@@ -23,7 +27,7 @@ object ObservableExample1 {
     }
   })
 
-  val listOfNames = Knockout.observableArray[String](Nil)
+  val listOfNames = Knockout.observableArray[String]()
 
   def insertName(): Unit = {
     if(firstName().isEmpty)

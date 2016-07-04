@@ -15,7 +15,7 @@ object Knockout {
   def observable[T](v: T): ko.Observable[T] =
     ko.observable(v)
 
-  def observableArray[T](v: Seq[T]): ko.ObservableArray[T] =
+  def observableArray[T](v: T*): ko.ObservableArray[T] =
     ko.observableArray(js.Array(v :_*))
 
   def computed[T](readFn: () => T, deferEvaluation: Boolean = false, disposeWhen: Boolean = false, disposeWhenNodeIsRemoved: Boolean = false): ko.Computed[T] =

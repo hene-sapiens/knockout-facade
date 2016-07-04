@@ -11,10 +11,13 @@
     <script type="text/javascript" src="assets/knockout-example-fastopt.js"></script>
     <script type="text/javascript" src="assets/knockout-example-jsdeps.js"></script>
 
-    <a href="#a" data-bind="click: function() { visibleExample('observableExample1') }"> Observable Example </a>
-    <a href="#b" data-bind="click: function() { visibleExample('componentExample1') }"> Simple component </a>
-
-    <br/> <br/>
+    <select data-bind=" optionsCaption: 'Select an example',
+                        options: examples,
+                        optionsText: 'name',
+                        optionsValue: 'id',
+                        value: visibleExample">
+    </select>
+    <br/>
 
     <div data-bind="with: observableExample1, visible: visibleExample() == 'observableExample1'">
         @views.html.observableExample1()
