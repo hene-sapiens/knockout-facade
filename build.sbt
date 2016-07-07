@@ -26,6 +26,7 @@ val knockoutExampleBackend = Project("knockout-example-backend", file("example-b
     name := "knockout-example-backend",
     scalaVersion := "2.11.8",
     version := "1.0",
-    unmanagedResources in Compile ++= (knockoutExample.base / "target" / "scala-2.11" ** "*js").get
+    unmanagedResources in Compile ++= (knockoutExample.base / "target" / "scala-2.11" ** "*js").get,
+    compile in Compile <<= (compile in Compile) dependsOn (fastOptJS in (knockoutExample, Compile))
   ).enablePlugins(PlayScala)
   .dependsOn(knockoutExample)
