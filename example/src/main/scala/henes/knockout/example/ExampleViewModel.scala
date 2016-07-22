@@ -2,9 +2,9 @@ package henes.knockout.example
 
 import henes.knockout.facade.ko
 import henes.knockout.facade.ko.PureComputedOptions
-import henes.knockout.facade.utils.{Extender, Knockout, RateLimitExtender}
+import henes.knockout.facade.utils.{Knockout, RateLimitExtender}
 import org.scalajs.dom.raw.XMLHttpRequest
-import org.scalajs.dom.{Event, window, document}
+import org.scalajs.dom.{Event, document, window}
 
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSExportAll
@@ -91,7 +91,7 @@ class ExampleViewModel {
   case class Valid[T](value: T) extends Validity[T]
   case class Invalid[T](msg: String) extends Validity[T]
 
-  val validationExtender = Extender[String, Validity[String], String]("validationExtender",
+  val validationExtender = Knockout.extender[String, Validity[String], String]("validationExtender",
     (target, invalidCharacters) => Knockout.pureComputed {
       () =>
         val value = target()

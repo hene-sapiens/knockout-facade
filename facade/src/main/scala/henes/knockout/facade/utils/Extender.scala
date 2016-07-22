@@ -5,15 +5,20 @@ import henes.knockout.facade.ko
 import scala.scalajs.js
 
 case class Extender[I, O, P](name: String, fn: (ko.Observable[I], P) => ko.Observable[O]) {
-  ko.extenders.updateDynamic(name) {
-    (k: ko.Observable[I], p: P) => fn(k, p)
-  }
-
   def extend(o: ko.Observable[I]): ko.Observable[O] =
     o.extend[O](js.Dynamic.literal(name -> null))
 
   def extend(o: ko.Observable[I], parameter: P): ko.Observable[O] =
     o.extend[O](js.Dynamic.literal(name -> parameter.asInstanceOf[js.Any]))
+}
+
+object Extender {
+  def register[I, O, P](e: Extender[I, O, P]): Extender[I, O, P] = {
+    ko.extenders.updateDynamic(e.name) {
+      (k: ko.Observable[I], p: P) => e.fn(k, p)
+    }
+    e
+  }
 }
 
 object RateLimitExtender {

@@ -35,16 +35,20 @@ case class Component[V, P <: js.Object](name: String, createViewModelFn: (P, ko.
         instancesMap -= node
         updateInstancesObservable()
     }
+}
 
-
-  ko.components.register(name, js.Dynamic.literal(
-    viewModel = js.Dynamic.literal(
-      createViewModel = {
-        (params: P, componentInfo: ko.components.ComponentInfo) =>
-          val viewModel = createViewModelFn(params, componentInfo)
-          addInstance(componentInfo.element, viewModel)
-          viewModel
-      }
-    ), template = template
-  ).asInstanceOf[ko.components.ComponentParameters])
+object Component {
+  def register[V, P <: js.Object](component: Component[V, P]): Component[V, P] = {
+    ko.components.register(component.name, js.Dynamic.literal(
+      viewModel = js.Dynamic.literal(
+        createViewModel = {
+          (params: P, componentInfo: ko.components.ComponentInfo) =>
+            val viewModel = component.createViewModelFn(params, componentInfo)
+            component.addInstance(componentInfo.element, viewModel)
+            viewModel
+        }
+      ), template = component.template
+    ).asInstanceOf[ko.components.ComponentParameters])
+    component
+  }
 }

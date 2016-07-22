@@ -170,8 +170,6 @@ object ko extends js.Object {
 
     @js.native
     trait ComponentLoader extends js.Object {
-      // TODO: Types for componentConfig, templateConfig and callback functions?
-
       // getConfig(name, callback)
       def getConfig: js.Function2[String, js.Function1[js.Object, _], _] = js.native
 

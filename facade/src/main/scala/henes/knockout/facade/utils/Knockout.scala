@@ -37,12 +37,18 @@ object Knockout {
       write = { v: T => writeFn(v) }
     ).asInstanceOf[ko.PureComputedOptions[T]])
 
-  def component[V, P <: js.Object](name: String, createViewModelFn: (P, ko.components.ComponentInfo) => V, template: String): Component[V, P] =
-    Component(name, createViewModelFn, template)
+  def component[V, P <: js.Object](name: String, createViewModelFn: (P, ko.components.ComponentInfo) => V, template: String): Component[V, P] = {
+    val c = new Component(name, createViewModelFn, template)
+    Component.register(c)
+  }
 
-  def extender[I, O](name: String, fn: ko.Observable[I] => ko.Observable[O]): Extender[I, O, Unit] =
-    Extender[I, O, Unit](name, (o, _) => fn(o))
+  def extender[I, O](name: String, fn: ko.Observable[I] => ko.Observable[O]): Extender[I, O, Unit] = {
+    val e = Extender[I, O, Unit](name, (o, _) => fn(o))
+    Extender.register(e)
+  }
 
-  def extender[I, O, P](name: String, fn: (ko.Observable[I], P) => ko.Observable[O]): Extender[I, O, P] =
-    Extender(name, fn)
+  def extender[I, O, P](name: String, fn: (ko.Observable[I], P) => ko.Observable[O]): Extender[I, O, P] = {
+    val e = Extender(name, fn)
+    Extender.register(e)
+  }
 }
